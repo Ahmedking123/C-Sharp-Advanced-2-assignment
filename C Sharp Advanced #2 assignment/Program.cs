@@ -69,7 +69,16 @@ namespace C_Sharp_Advanced__2_assignment
 
             #endregion
 
+            #region #4
 
+            var LowStockItems = FilterProducts(list, x => x.Stock < 20);
+
+            foreach(var item in LowStockItems)
+            {
+                Console.WriteLine($"[LOW STOCK] {item.Name}: only {item.Stock} left!");
+            }
+
+            #endregion
 
 
         }
@@ -100,7 +109,18 @@ namespace C_Sharp_Advanced__2_assignment
             return TransformedProducts;
         }
 
-
+        static List<Product> FilterProducts(List<Product> list,Predicate<Product> predicate)
+        {
+            List<Product> FilteredProducts = new();
+            foreach(var item in list)
+            {
+                if (predicate(item))
+                {
+                    FilteredProducts.Add(item);
+                }
+            }
+            return FilteredProducts;
+        }
 
 
 
