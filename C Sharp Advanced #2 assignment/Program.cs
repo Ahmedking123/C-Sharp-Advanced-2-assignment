@@ -51,7 +51,26 @@ namespace C_Sharp_Advanced__2_assignment
 
             #endregion
 
-           
+            #region #3
+
+            var TransformedProducts = TransformProducts(list, (x) => $"{x.Name} (${x.Price})");
+            Console.WriteLine("---Summary list---\n");
+            foreach (var item in TransformedProducts)
+            {
+                Console.WriteLine(item);
+            }
+
+            TransformedProducts.Clear();
+            TransformedProducts = TransformProducts(list, (x) => $"{x.Name}: {(x.Price > 100 ? "Expensive" : "Affordable")}");
+            foreach (var item in TransformedProducts)
+            {
+                Console.WriteLine(item);
+            }
+
+            #endregion
+
+
+
 
         }
         static void print(List<Product> list)
@@ -70,7 +89,20 @@ namespace C_Sharp_Advanced__2_assignment
             }
         }
 
-   
-            
+
+        static List<string> TransformProducts(List<Product> list, Func<Product, string> dlg)
+        {
+            List<string> TransformedProducts = new();
+            foreach (var item in list)
+            {
+                TransformedProducts.Add(dlg(item));
+            }
+            return TransformedProducts;
+        }
+
+
+
+
+
     }
 }
