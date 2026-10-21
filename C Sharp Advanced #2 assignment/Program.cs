@@ -1,4 +1,6 @@
-﻿namespace C_Sharp_Advanced__2_assignment
+﻿using System.Transactions;
+
+namespace C_Sharp_Advanced__2_assignment
 {
     internal class Program
     {
@@ -39,18 +41,36 @@
             predicate = x => x.Category == "Clothing" && x.Price < 100;
             var ClothingUnder100 = list.Where(predicate).ToList();
             Console.WriteLine("Clothing Under 100$\n");
-            print(ClothingUnder100); 
+            print(ClothingUnder100);
 
             #endregion
+            #region #2
+
+            PrintReport(list, (x) => Console.WriteLine($"{x.Name} - ${x.Price}"));
+            PrintReport(list, (x) => Console.WriteLine($"[{x.Category}]{x.Name} | Price: ${x.Price} | Stock: {x.Stock}"));
+
+            #endregion
+
+           
 
         }
         static void print(List<Product> list)
         {
             foreach (var item in list)
             {
-                Console.WriteLine($"{item.Category} - ${item.Price}(Stock: {item.Stock})");
+                Console.WriteLine($"{item.Category} - ${item.Price}(Stock: {item.Stock} (${item.Price})");
             }
         }
+
+        static void PrintReport(List<Product> products,Action<Product> action)
+        {
+            foreach (var item in products)
+            {
+                action(item);
+            }
+        }
+
+   
             
     }
 }
